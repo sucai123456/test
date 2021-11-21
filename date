@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script>
+var str1 = '2021-10-30';   //字符串格式的时间类型
+var date = new Date(str1);   //date格式的时间类型
+var nowDate = addMonth(26);   //date格式的时间类型
+nowDate=new Date(dateToString(nowDate))
+console.log(nowDate)
+function addMonth (addMonth) {
+        var y = date.getFullYear();
+        var m = date.getMonth();
+        var nextY = y;
+        var nextM = m;
+        //如果当前月+增加的月>11 这里之所以用11是因为 js的月份从0开始
+        if ((m + addMonth)> 11) {
+            nextY = y + 1;
+            nextM = parseInt(m + addMonth) - 12;
+        } else {
+            nextM = date.getMonth() + addMonth
+        }
+        var daysInNextMonth = daysInMonth(nextY, nextM);
+        var day = date.getDate();
+        if (day > daysInNextMonth) {
+            day = daysInNextMonth;
+        }
+        return new Date(nextY, nextM, day);
+    };
+
+    //计算当前月最大天数
+    function daysInMonth(year, month) {
+        if (month == 1) {
+            if (year % 4 == 0 && year % 100 != 0)
+                return 29;
+            else
+                return 28;
+        } else if ((month <= 6 && month % 2 == 0) || (month > 6 && month % 2 == 1))
+            return 31;
+        else
+            return 30;
+    };
+    function dateToString(date){
+		var year=date.getFullYear()
+		var month=date.getMonth()+1
+		if(month<10){
+			 month='0'+month
+		}
+		var day=date.getDate()
+		if(day<10){
+			day='0'+day
+		}
+		 return year+'-'+month+'-'+day
+	}
+	
+ </script>
